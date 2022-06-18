@@ -6,7 +6,7 @@ const blog_index =(req,res)=>{
     Blog.find()
     .then((result)=>{
         console.log("Returning all blogs to home")
-        res.render('index',{title:'All blogs', blogs:result});
+        res.render('blogs/index',{title:'All blogs', blogs:result});
 
     })
     .catch((err)=>{
@@ -24,7 +24,7 @@ const blog_details = (req,res)=>{
     .then((result)=>{
         const blog = result;
         console.log("returning a single blog with id")
-        res.render('details', {blog:blog, title:'Blog details'});
+        res.render('blogs/details', {blog:blog, title:'Blog details'});
     })
     .catch((err)=>{
         console.log(err)
@@ -33,7 +33,7 @@ const blog_details = (req,res)=>{
 }
 
 const blog_create_get = (req,res)=>{
-    res.render('create', { title: 'Create a new blog' });
+    res.render('blogs/create', { title: 'Create a new blog' });
 }
 
 const blog_create_post = (req,res)=>{
@@ -50,7 +50,7 @@ const blog_create_post = (req,res)=>{
      .then((result)=>{
          console.log(result)
     
-         res.redirect('/');
+         res.redirect('blogs/');
     
      })
     .catch((err)=>{

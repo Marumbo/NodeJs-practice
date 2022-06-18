@@ -2,14 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const blogRouter = require('./routes/blogRoutes')
 
+require('dotenv').config();
 // express app
 const app = express();
 
 
 //db connet mondo
 
-const dbURI ='mongodb+srv://testUser:2TestUser@node-practice.4fa5l.mongodb.net/node-tut?retryWrites=true&w=majority'
-mongoose.connect(dbURI)
+
+mongoose.connect(process.env.dbURI)
 .then((result)=>{
     console.log('connected to db!')
     console.log('Started server on port 4000!')
@@ -30,6 +31,11 @@ app.use(express.static('public'));
 //making body have form data from url post
 app.use(express.urlencoded({extended:true}))
 
+
+app.use((req, res, next) => {
+    res.locals.path = req.path;
+    next();
+  });
 // getting and saving from db
 
 
